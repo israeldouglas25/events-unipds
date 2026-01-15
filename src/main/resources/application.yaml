@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: events
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_events?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: root
+    password: 123
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          format_sql: true
+  server:
+    error:
+      include-stacktrace: never
