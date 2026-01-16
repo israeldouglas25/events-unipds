@@ -1,4 +1,4 @@
-package br.com.israel.events.services;
+package br.com.israel.events.services.user;
 
 import br.com.israel.events.domain.User;
 
@@ -10,4 +10,5 @@ public interface IUserService {
     List<User> getAll();
     User update(User user);
     void delete(Integer id);
+    User getByEmail(String email);
 }

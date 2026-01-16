@@ -1,4 +1,4 @@
-package br.com.israel.events.services;
+package br.com.israel.events.services.subscription;
 
 import br.com.israel.events.domain.Session;
 import br.com.israel.events.domain.Subscription;
@@ -26,11 +26,11 @@ public class SubscriptionService implements ISubscriptionService{
 
     @Override
     public List<Subscription> getAllByUser(User user) {
-        return subscriptionRepository.findByUser(user);
+        return subscriptionRepository.findByIdUser(user);
     }
 
     @Override
     public List<Subscription> getAllBySession(Session session) {
-        return subscriptionRepository.findBySession(session);
+        return subscriptionRepository.findByIdSession(session);
     }
 }

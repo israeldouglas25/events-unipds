@@ -1,4 +1,4 @@
-package br.com.israel.events.services;
+package br.com.israel.events.services.session;
 
 import br.com.israel.events.domain.Session;
 

@@ -1,4 +1,4 @@
-package br.com.israel.events.services;
+package br.com.israel.events.services.conference;
 
 import br.com.israel.events.domain.Conference;
 

@@ -1,6 +1,7 @@
-package br.com.israel.events.services;
+package br.com.israel.events.services.user;
 
 import br.com.israel.events.domain.User;
+import br.com.israel.events.exceptions.NotFoundException;
 import br.com.israel.events.interfaces.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,7 @@ public class UserService implements IUserService {
 
     @Override
     public User getById(Integer id) {
-        try {
-            return userRepository.getReferenceById(id);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found: " + id));
     }
 
     @Override
@@ -34,9 +31,13 @@ public class UserService implements IUserService {
 
     @Override
     public User update(User user) {
-        User newUser = getById(user.getUserId());
-        newUser.setName(user.getName());
-        newUser.setEmail(user.getEmail());
+        User newUser = new User();
+        if (user.getName() != null) {
+            newUser.setName(user.getName());
+        }
+        if (user.getEmail() != null) {
+            newUser.setEmail(user.getEmail());
+        }
         return userRepository.save(newUser);
     }
 
@@ -44,5 +45,10 @@ public class UserService implements IUserService {
     public void delete(Integer id) {
         User user = getById(id);
         userRepository.delete(user);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found: " + email));
     }
 }
