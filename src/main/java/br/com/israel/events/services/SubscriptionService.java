@@ -1,0 +1,36 @@
+package br.com.israel.events.services;
+
+import br.com.israel.events.domain.Session;
+import br.com.israel.events.domain.Subscription;
+import br.com.israel.events.domain.User;
+import br.com.israel.events.interfaces.SubscriptionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class SubscriptionService implements ISubscriptionService{
+
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
+
+    @Override
+    public Subscription create(Subscription subscription) {
+        subscription.setCreatedAt(LocalDateTime.now());
+        subscription.setUniqueID(UUID.randomUUID().toString());
+        return subscriptionRepository.save(subscription);
+    }
+
+    @Override
+    public List<Subscription> getAllByUser(User user) {
+        return subscriptionRepository.findByUser(user);
+    }
+
+    @Override
+    public List<Subscription> getAllBySession(Session session) {
+        return subscriptionRepository.findBySession(session);
+    }
+}
