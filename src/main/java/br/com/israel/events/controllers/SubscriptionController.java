@@ -25,7 +25,7 @@ public class SubscriptionController {
     @GetMapping("/user/{id}")
     public ResponseEntity<List<Subscription>> getByUserId(@PathVariable Integer id) {
         User user = new User();
-        user.setUserId(id);
+        user.setIdUser(id);
         return ResponseEntity.ok(iSubscriptionService.getAllByUser(user));
     }
 
