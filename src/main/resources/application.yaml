@@ -6,13 +6,13 @@ spring:
     url: jdbc:mysql://localhost:3306/db_events?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     username: root
     password: 123
-    jpa:
-      show-sql: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
       hibernate:
-        ddl-auto: update
-      properties:
-        hibernate:
-          format_sql: true
+        format_sql: true
   server:
     error:
       include-stacktrace: never

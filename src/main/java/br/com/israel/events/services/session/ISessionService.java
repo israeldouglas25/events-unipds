@@ -8,6 +8,6 @@ public interface ISessionService {
     Session create(Session session);
     Session getById(Integer id);
     List<Session> getAll();
-    Session update(Session session);
+    Session update(Session session, Session updateSession);
     void delete(Integer id);
 }

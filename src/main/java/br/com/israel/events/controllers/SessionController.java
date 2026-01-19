@@ -31,9 +31,9 @@ public class SessionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Session> update(@PathVariable Integer id) {
+    public ResponseEntity<Session> update(@PathVariable Integer id, Session updateSession) {
         Session session = iSessionService.getById(id);
-        return ResponseEntity.ok(iSessionService.update(session));
+        return ResponseEntity.ok(iSessionService.update(session, updateSession));
     }
 
     @DeleteMapping("/{id}")

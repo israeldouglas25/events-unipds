@@ -30,21 +30,20 @@ public class SessionService implements ISessionService {
     }
 
     @Override
-    public Session update(Session session) {
-        Session newSession = new Session();
-        if (session.getTitle() != null) {
-            newSession.setTitle(session.getTitle());
+    public Session update(Session session, Session updateSession) {
+        if (updateSession.getTitle() != null) {
+            session.setTitle(updateSession.getTitle());
         }
-        if (session.getStartDate() != null) {
-            newSession.setStartDate(session.getStartDate());
+        if (updateSession.getStartDate() != null) {
+            session.setStartDate(updateSession.getStartDate());
         }
-        if (session.getStartTime() != null) {
-            newSession.setStartTime(session.getStartTime());
+        if (updateSession.getStartTime() != null) {
+            session.setStartTime(updateSession.getStartTime());
         }
-        if (session.getConference() != null) {
-            newSession.setConference(session.getConference());
+        if (updateSession.getConference() != null) {
+            session.setConference(updateSession.getConference());
         }
-        return sessionRepository.save(newSession);
+        return sessionRepository.save(session);
     }
 
     @Override
