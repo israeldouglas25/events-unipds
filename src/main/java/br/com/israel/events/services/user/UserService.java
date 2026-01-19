@@ -6,6 +6,7 @@ import br.com.israel.events.exceptions.NotFoundException;
 import br.com.israel.events.interfaces.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class UserService implements IUserService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public User create(User user) {
         if (user.getName() == null || user.getEmail() == null) {
             throw new BadRequestException("Name and email are required");
@@ -34,6 +36,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public User update(User user, User updateUser) {
         if (updateUser.getName() != null) {
             user.setName(updateUser.getName());
@@ -45,6 +48,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
         User user = getById(id);
         userRepository.delete(user);

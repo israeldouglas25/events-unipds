@@ -5,6 +5,7 @@ import br.com.israel.events.exceptions.NotFoundException;
 import br.com.israel.events.interfaces.ConferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class ConferenceService implements IConferenceService {
     private ConferenceRepository conferenceRepository;
 
     @Override
+    @Transactional
     public Conference create(Conference conference) {
         return conferenceRepository.save(conference);
     }

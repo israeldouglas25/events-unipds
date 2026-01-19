@@ -5,6 +5,7 @@ import br.com.israel.events.exceptions.NotFoundException;
 import br.com.israel.events.interfaces.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class SessionService implements ISessionService {
     private SessionRepository sessionRepository;
 
     @Override
+    @Transactional
     public Session create(Session session) {
         return sessionRepository.save(session);
     }
@@ -30,6 +32,7 @@ public class SessionService implements ISessionService {
     }
 
     @Override
+    @Transactional
     public Session update(Session session, Session updateSession) {
         if (updateSession.getTitle() != null) {
             session.setTitle(updateSession.getTitle());
@@ -47,6 +50,7 @@ public class SessionService implements ISessionService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
         Session session = getById(id);
         sessionRepository.delete(session);

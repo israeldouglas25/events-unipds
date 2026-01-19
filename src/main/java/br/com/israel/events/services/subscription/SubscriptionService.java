@@ -6,6 +6,7 @@ import br.com.israel.events.domain.User;
 import br.com.israel.events.interfaces.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +19,7 @@ public class SubscriptionService implements ISubscriptionService{
     private SubscriptionRepository subscriptionRepository;
 
     @Override
+    @Transactional
     public Subscription create(Subscription subscription) {
         subscription.setCreatedAt(LocalDateTime.now());
         subscription.setUniqueID(UUID.randomUUID().toString());
