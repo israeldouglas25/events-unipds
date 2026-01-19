@@ -1,6 +1,7 @@
 package br.com.israel.events.services.user;
 
 import br.com.israel.events.domain.User;
+import br.com.israel.events.exceptions.BadRequestException;
 import br.com.israel.events.exceptions.NotFoundException;
 import br.com.israel.events.interfaces.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class UserService implements IUserService {
 
     @Override
     public User create(User user) {
+        if (user.getName() == null || user.getEmail() == null) {
+            throw new BadRequestException("Name and email are required");
+        }
         return userRepository.save(user);
     }
 
@@ -30,15 +34,14 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User update(User user) {
-        User newUser = new User();
-        if (user.getName() != null) {
-            newUser.setName(user.getName());
+    public User update(User user, User updateUser) {
+        if (updateUser.getName() != null) {
+            user.setName(updateUser.getName());
         }
-        if (user.getEmail() != null) {
-            newUser.setEmail(user.getEmail());
+        if (updateUser.getEmail() != null) {
+            user.setEmail(updateUser.getEmail());
         }
-        return userRepository.save(newUser);
+        return userRepository.save(user);
     }
 
     @Override
