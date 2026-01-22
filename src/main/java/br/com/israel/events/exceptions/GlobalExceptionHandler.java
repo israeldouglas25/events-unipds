@@ -22,6 +22,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleBadRequest(BadRequestException ex, HttpServletRequest request) {
         return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, "Bad Request", request);
     }
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorResponse> handleForbidden(ForbiddenException ex, HttpServletRequest request) {
+        return buildErrorResponse(ex, HttpStatus.FORBIDDEN, "Forbidden", request);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex, HttpServletRequest request) {
