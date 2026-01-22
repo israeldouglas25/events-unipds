@@ -4,6 +4,7 @@ import br.com.israel.events.domain.Session;
 import br.com.israel.events.domain.Subscription;
 import br.com.israel.events.domain.User;
 import br.com.israel.events.services.subscription.ISubscriptionService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subscriptions")
+@RequestMapping("api/v1/subscriptions")
+@SecurityRequirement(name = "bearer-key")
 public class SubscriptionController {
 
     @Autowired

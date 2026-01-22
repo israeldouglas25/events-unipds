@@ -2,6 +2,7 @@ package br.com.israel.events.controllers;
 
 import br.com.israel.events.domain.Conference;
 import br.com.israel.events.services.conference.IConferenceService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/conferences")
+@RequestMapping("api/v1/conferences")
+@SecurityRequirement(name = "bearer-key")
 public class ConferenceController {
 
     @Autowired

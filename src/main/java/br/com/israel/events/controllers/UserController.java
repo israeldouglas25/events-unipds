@@ -1,7 +1,9 @@
 package br.com.israel.events.controllers;
 
 import br.com.israel.events.domain.User;
+import br.com.israel.events.domain.dto.UserDetailsResponse;
 import br.com.israel.events.services.user.IUserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,38 +14,38 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/v1/users")
+@SecurityRequirement(name = "bearer-key")
 public class UserController {
 
     @Autowired
     private IUserService iUserService;
 
     @PostMapping
-    public ResponseEntity<User> create(@Valid @RequestBody User user, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserDetailsResponse> create(@Valid @RequestBody User user, UriComponentsBuilder uriBuilder) {
         var createdUser = iUserService.create(user);
-        URI uri = uriBuilder.path("/users/{id}").buildAndExpand(createdUser.getIdUser()).toUri();
-        return ResponseEntity.created(uri).body(iUserService.create(user));
+        URI uri = uriBuilder.path("/users/{id}").buildAndExpand(createdUser.idUser()).toUri();
+        return ResponseEntity.created(uri).body(createdUser);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll() {
+    public ResponseEntity<List<UserDetailsResponse>> getAll() {
         return ResponseEntity.ok(iUserService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Integer id) {
+    public ResponseEntity<UserDetailsResponse> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(iUserService.getById(id));
     }
 
     @GetMapping("email/{email}")
-    public ResponseEntity<User> getByEmail(@PathVariable String email) {
+    public ResponseEntity<UserDetailsResponse> getByEmail(@PathVariable String email) {
         return ResponseEntity.ok(iUserService.getByEmail(email));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable Integer id, @RequestBody User updateUser) {
-        User user = iUserService.getById(id);
-        return ResponseEntity.ok(iUserService.update(user, updateUser));
+    public ResponseEntity<UserDetailsResponse> update(@PathVariable Integer id, @RequestBody User updateUser) {
+        return ResponseEntity.ok(iUserService.update(id, updateUser));
     }
 
     @DeleteMapping("/{id}")

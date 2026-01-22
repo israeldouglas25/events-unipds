@@ -2,6 +2,7 @@ package br.com.israel.events.controllers;
 
 import br.com.israel.events.domain.Session;
 import br.com.israel.events.services.session.ISessionService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/sessions")
+@RequestMapping("api/v1/sessions")
+@SecurityRequirement(name = "bearer-key")
 public class SessionController {
 
     @Autowired
