@@ -1,14 +1,15 @@
 package br.com.israel.events.services.user;
 
 import br.com.israel.events.domain.User;
+import br.com.israel.events.domain.dto.UserDetailsResponse;
 
 import java.util.List;
 
 public interface IUserService {
-    User create(User user);
-    User getById(Integer id);
-    List<User> getAll();
-    User update(User user, User updateUser);
+    UserDetailsResponse create(User user);
+    UserDetailsResponse getById(Integer id);
+    List<UserDetailsResponse> getAll();
+    UserDetailsResponse update(Integer id, User updateUser);
     void delete(Integer id);
-    User getByEmail(String email);
+    UserDetailsResponse getByEmail(String email);
 }

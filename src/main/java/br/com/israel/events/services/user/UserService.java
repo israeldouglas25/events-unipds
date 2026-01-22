@@ -1,10 +1,12 @@
 package br.com.israel.events.services.user;
 
 import br.com.israel.events.domain.User;
+import br.com.israel.events.domain.dto.UserDetailsResponse;
 import br.com.israel.events.exceptions.BadRequestException;
 import br.com.israel.events.exceptions.NotFoundException;
 import br.com.israel.events.interfaces.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,46 +18,54 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     @Transactional
-    public User create(User user) {
+    public UserDetailsResponse create(User user) {
         if (user.getName() == null || user.getEmail() == null) {
             throw new BadRequestException("Name and email are required");
         }
-        return userRepository.save(user);
+        String passEncode = passwordEncoder.encode(user.getPassword());
+        User saved = userRepository.save(new User(user.getName(), user.getEmail(), passEncode));
+        return new UserDetailsResponse(saved);
     }
 
     @Override
-    public User getById(Integer id) {
-        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found: " + id));
+    public UserDetailsResponse getById(Integer id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found: " + id));
+        return new UserDetailsResponse(user);
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserDetailsResponse> getAll() {
+        return userRepository.findAll().stream().map(UserDetailsResponse::new).toList();
     }
 
     @Override
     @Transactional
-    public User update(User user, User updateUser) {
+    public UserDetailsResponse update(Integer id, User updateUser) {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found: " + id));
         if (updateUser.getName() != null) {
             user.setName(updateUser.getName());
         }
         if (updateUser.getEmail() != null) {
             user.setEmail(updateUser.getEmail());
         }
-        return userRepository.save(user);
+        return new UserDetailsResponse(userRepository.save(user));
     }
 
     @Override
     @Transactional
     public void delete(Integer id) {
-        User user = getById(id);
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found: " + id));
         userRepository.delete(user);
     }
 
     @Override
-    public User getByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found: " + email));
+    public UserDetailsResponse getByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found: " + email));
+        return new UserDetailsResponse(user);
     }
 }
