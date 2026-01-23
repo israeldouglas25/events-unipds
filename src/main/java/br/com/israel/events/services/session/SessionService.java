@@ -2,7 +2,7 @@ package br.com.israel.events.services.session;
 
 import br.com.israel.events.domain.Session;
 import br.com.israel.events.exceptions.NotFoundException;
-import br.com.israel.events.interfaces.SessionRepository;
+import br.com.israel.events.repositories.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

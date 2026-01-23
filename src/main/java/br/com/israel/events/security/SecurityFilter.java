@@ -1,6 +1,6 @@
 package br.com.israel.events.security;
 
-import br.com.israel.events.interfaces.UserRepository;
+import br.com.israel.events.repositories.UserRepository;
 import br.com.israel.events.services.authentication.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

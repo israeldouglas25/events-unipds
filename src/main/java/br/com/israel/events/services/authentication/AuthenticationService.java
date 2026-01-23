@@ -1,6 +1,6 @@
 package br.com.israel.events.services.authentication;
 
-import br.com.israel.events.interfaces.UserRepository;
+import br.com.israel.events.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

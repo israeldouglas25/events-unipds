@@ -30,7 +30,7 @@ public class TokenService {
                     .withExpiresAt(dateExpiration())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
-            throw new BadRequestException("Erro ao gerar token JWT: " + exception);
+            throw new BadRequestException("Error generating JWT token: " + exception);
         }
     }
 
@@ -44,7 +44,7 @@ public class TokenService {
                     .getSubject();
 
         } catch (JWTVerificationException exception) {
-            throw new ForbiddenException("Token invalido ou expirado!");
+            throw new ForbiddenException("Invalid or expired token!");
         }
     }
 

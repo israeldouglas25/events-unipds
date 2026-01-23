@@ -1,4 +1,4 @@
-package br.com.israel.events.interfaces;
+package br.com.israel.events.repositories;
 
 import br.com.israel.events.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

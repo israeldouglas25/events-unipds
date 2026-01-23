@@ -3,7 +3,7 @@ package br.com.israel.events.services.subscription;
 import br.com.israel.events.domain.Session;
 import br.com.israel.events.domain.Subscription;
 import br.com.israel.events.domain.User;
-import br.com.israel.events.interfaces.SubscriptionRepository;
+import br.com.israel.events.repositories.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

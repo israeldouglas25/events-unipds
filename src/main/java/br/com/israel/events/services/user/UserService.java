@@ -4,7 +4,7 @@ import br.com.israel.events.domain.User;
 import br.com.israel.events.domain.dto.UserDetailsResponse;
 import br.com.israel.events.exceptions.BadRequestException;
 import br.com.israel.events.exceptions.NotFoundException;
-import br.com.israel.events.interfaces.UserRepository;
+import br.com.israel.events.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

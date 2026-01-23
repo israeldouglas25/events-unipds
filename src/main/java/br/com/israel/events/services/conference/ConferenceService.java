@@ -2,7 +2,7 @@ package br.com.israel.events.services.conference;
 
 import br.com.israel.events.domain.Conference;
 import br.com.israel.events.exceptions.NotFoundException;
-import br.com.israel.events.interfaces.ConferenceRepository;
+import br.com.israel.events.repositories.ConferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
